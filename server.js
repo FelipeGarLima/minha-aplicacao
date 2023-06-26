@@ -11,9 +11,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Rota de autenticação
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { usuario, senha } = req.body;
-  const autenticado = authService.autenticarUsuario(usuario, senha);
+  const autenticado = await authService.autenticarUsuario(usuario, senha);
+  console.log(autenticado)
   if (autenticado) {
     res.redirect('/consultar');
   } else {
